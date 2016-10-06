@@ -79,6 +79,7 @@ void Cobra::inicia(const int x, const int y)
 
 void Cobra::destroi(void)
 {
+  /// limpa a lista
   while(pedacos.size() > 0) {
     pedacos.pop_back();
   }
@@ -162,8 +163,6 @@ void Cobra::movimenta(void)
   if( tempo_movimenta() == false ) {
     return;
   }
-  Pedaco* next = new Pedaco;
-  Pedaco* prev = new Pedaco;
   if (dir == Direcao::esquerda) {
     pedacos.front()->p.x -= tam.larg;
   } else if (dir == Direcao::direita) {
@@ -181,17 +180,21 @@ void Cobra::movimenta(void)
     destroi();
     return;
   }
+  Pedaco* next = new Pedaco;
+  Pedaco* prev = new Pedaco;
+
   next->p = pedacos.front()->p;
   next->dir = dir;
 
   /// percorrendo a lista com os pedaços
   for(auto it = begin(pedacos); it != end(pedacos); it++) {
     Pedaco* ped = *it;
+
     /// o anterior recebe a posição do iterador
     prev->p = ped->p;
     /// o iterador recebe a posição do proximo
     ped->p = next->p;
-    /// o proximo recebe a posição do anterior (lista lida de frente para tras)
+    /// o proximo recebe a antiga posição do iterador
     next->p = prev->p;
     /// o anterior recebe a direção do atual
     prev->dir = ped->dir;
@@ -200,7 +203,6 @@ void Cobra::movimenta(void)
     /// o proximo recebe a direção do anterior
     next->dir = prev->dir;
   }
-
 }
 bool Cobra::tempo_movimenta(void)
 {
