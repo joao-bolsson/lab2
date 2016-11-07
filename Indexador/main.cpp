@@ -1,12 +1,10 @@
 #include <iostream>
 #include <fstream>
-#include <functional>
 #include <algorithm>
 #include <list>
 #include <vector>
 
 using namespace std;
-
 
 struct Posicao {
   int linha;
@@ -48,10 +46,16 @@ public:
 	}
 
 	void printLista() {
-    cout << "(";
+    cout << " (";
+    int cont = 0;
+    int size_list = palavra.lista.size();
     for (auto it = palavra.lista.begin(); it != palavra.lista.end(); it++) {
+      cont++;
       Posicao pos = *it;
-      cout << pos.linha << ":" << pos.coluna << ", ";
+      cout << pos.linha << ":" << pos.coluna;
+      if (cont < size_list) {
+        cout << ", ";
+      }
     }
     cout << ")\n";
 	}
@@ -101,8 +105,6 @@ private:
       no->updateContagem();
       no->updateLista(chave.lista.back());
 		}
-		// se for igual, não vai inserir
-		// não pode existir 2 chaves iguais
 	}
 
 public:
@@ -162,7 +164,13 @@ Arvore le_arquivo(const char* nome) {
       for (int i = 0; i < tam; i++) {
         Palavra word;
         if (i != 0) {
-          pos.coluna = v[i - 1].size() + 1;
+          int coluna = 0;
+          for (int j = 0; j < i; j++) {
+            coluna += v[j].size();
+          }
+          /// a coluna é o tamanho das palavras anteriores a ela
+          /// + a quantidade de espaços na linha e + 1
+          pos.coluna = coluna + i + 1;
         }
         word.palavra = v[i];
         word.contagem = 1;
@@ -183,15 +191,12 @@ int main(int argc, char *argv[]) {
     cout << "Insira o caminho do arquivo\nABORTADO\n" << endl;
     return 0;
   }
-
   const char* path = argv[1];
   Arvore arv = le_arquivo(path);
   if (arv.getRaiz() == NULL) {
-    cout << "Ocorreu um erro na leitura do arquivo\n" << endl;
+    cout << "O arquivo está vazio\n" << endl;
     return 0;
   }
-	// percorre a árvore
-	cout << "Percorrendo em ordem...\n";
 	arv.emOrdem(arv.getRaiz());
 	cout << '\n';
 	return 0;
