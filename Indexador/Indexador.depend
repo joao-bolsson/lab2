@@ -5,3 +5,11 @@
 	<functional>
 	<algorithm>
 
+1478547451 source:/home/ncc/joao/lab2/Indexador/main.cpp
+	<iostream>
+	<fstream>
+	<functional>
+	<algorithm>
+	<list>
+	<vector>
+
