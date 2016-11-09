@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <list>
 #include <vector>
-
+/// valgrind --leak-check=full ./Indexador ola.txt
+/// palavras com letra maiuscula
 using namespace std;
 
 struct Posicao {
@@ -38,11 +39,11 @@ public:
   }
 
 	void updateContagem() {
-    palavra.contagem++;
+        palavra.contagem++;
 	}
 
 	void updateLista(Posicao pos) {
-    palavra.lista.push_back(pos);
+        palavra.lista.push_back(pos);
 	}
 
 	void printLista() {
