@@ -3,8 +3,6 @@
 #include <algorithm>
 #include <list>
 #include <vector>
-/// valgrind --leak-check=full ./Indexador ola.txt
-/// palavras com letra maiuscula
 using namespace std;
 
 struct Posicao {
@@ -21,7 +19,7 @@ struct Palavra {
 class No {
 private:
 	No *esq, *dir;
-    Palavra palavra;
+  Palavra palavra;
 
 public:
 	No(Palavra palavra) {
@@ -53,7 +51,7 @@ public:
     for (auto it = palavra.lista.begin(); it != palavra.lista.end(); it++) {
       cont++;
       Posicao pos = *it;
-      cout << pos.linha << ":" << pos.coluna;
+      cout << pos.linha << ':' << pos.coluna;
       if (cont < size_list) {
         cout << ", ";
       }
@@ -133,16 +131,35 @@ public:
 			emOrdem(no->getDir());
 		}
 	}
+
+	void destroi() {
+    raiz = NULL;
+	}
 };
 
-const vector<string> explode(const string& s, const char& c)
-{
+bool isValidChar(char c) {
+  /// aspas simples e hifen deixados propositalmente
+  char forbiddenChars[]  = {'!', '"', '#', '$', '%', '&', '*',
+    '(', ')', ',', '.', ':', ';', '+', '=', '{', '}', '[', ']', '`', '?'};
+  int len = sizeof(forbiddenChars)/sizeof(forbiddenChars[0]);
+  for (int i = 0; i < len; i++) {
+    if (c == forbiddenChars[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+const vector<string> explode(const string& s, const char& c) {
 	string buff{""};
 	vector<string> v;
 
 	for(auto n:s) {
-		if(n != c) buff+=n; else
-		if(n == c && buff != "") { v.push_back(buff); buff = ""; }
+    n = tolower(n);
+    if (isValidChar(n)) {
+      if(n != c) buff+=n; else
+      if(n == c && buff != "") { v.push_back(buff); buff = ""; }
+    }
 	}
 	if(buff != "") v.push_back(buff);
 
@@ -199,6 +216,7 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 	arv.emOrdem(arv.getRaiz());
+	arv.destroi();
 	cout << '\n';
 	return 0;
 }

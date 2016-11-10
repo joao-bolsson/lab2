@@ -1,8 +1,7 @@
 # depslib dependency file v1.0
-1478545582 source:/home/joao/CC/Lab2/Indexador/main.cpp
+1478736736 source:/home/joao/CC/Lab2/Indexador/main.cpp
 	<iostream>
 	<fstream>
-	<functional>
 	<algorithm>
 	<list>
 	<vector>
