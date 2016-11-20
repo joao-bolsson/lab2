@@ -74,12 +74,11 @@ map<string, Vertice> le_arquivo(const char* nome) {
           }
           grafo[v[0]] = Vertice();
           grafo[v[0]].nome = string{nome};
-          cout << v[0] << ' ' << nome;
           count_vertices++;
         } else {
-          cout << v[0] << ' ' << v[1];
+          grafo[v[0]].adj.push_back(v[1]);
+          grafo[v[1]].adj.push_back(v[0]);
         }
-        cout << '\n';
       }
     }
 
@@ -90,6 +89,18 @@ map<string, Vertice> le_arquivo(const char* nome) {
 
   return grafo;
 }
+
+void mostraGrafo(map<string, Vertice> grafo) {
+	for(auto it = begin(grafo); it != end(grafo); ++it) {
+		cout << it->first << " -> ";
+		list<string> lista = it->second.adj;
+		for (auto it = lista.begin(); it != lista.end(); it++) {
+      cout << (*it) << ' ';
+		}
+		cout << '\n';
+  }
+}
+
 int main(int argc, char **argv)
 {
   if (argc < 2) {
@@ -101,7 +112,7 @@ int main(int argc, char **argv)
 
   // Definicao do grafo: string -> Vertice
   map<string, Vertice> grafo = le_arquivo(path);
-
+  mostraGrafo(grafo);
   grafo.clear();
   return 0;
 }
