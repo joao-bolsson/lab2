@@ -3,7 +3,6 @@
 #include <list>
 #include <map>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -43,21 +42,44 @@ const vector<string> explode(const string& s, const char& c) {
   return v;
 }
 
+int getInt(string str_num) {
+  char char_num[str_num.size()];
+  int i = 0;
+  for (auto c:str_num) {
+    if (c >= '0' && c <= '9') {
+      char_num[i] = c;
+    }
+    i++;
+  }
+  return atoi(char_num);
+}
+
 map<string, Vertice> le_arquivo(const char* nome) {
   map<string, Vertice> grafo;
   string line;
   ifstream myfile (nome);
   if (myfile.is_open()) {
+    int num_vertices = -1, count_vertices = 0;
     while(!myfile.eof()) {
       getline (myfile,line);
       if (line.size() > 0) {
         vector<string> v{explode(line, ' ')};
-        cout << v[0] << ' ';
-        for (int unsigned i = 1; i < v.size(); i++) {
-          cout << v[i] << ' ';
+        if (num_vertices < 0) {
+          num_vertices = getInt(v[0]);
+          if (num_vertices < 1) return grafo;
+        } else if (count_vertices < num_vertices) {
+          string nome = "";
+          for (int unsigned i = 1; i < v.size(); i++) {
+            nome += v[i] + " ";
+          }
+          grafo[v[0]] = Vertice();
+          grafo[v[0]].nome = string{nome};
+          cout << v[0] << ' ' << nome;
+          count_vertices++;
+        } else {
+          cout << v[0] << ' ' << v[1];
         }
         cout << '\n';
-        //cout << v[0] << ' ' << v[1] << endl;
       }
     }
 
@@ -80,7 +102,6 @@ int main(int argc, char **argv)
   // Definicao do grafo: string -> Vertice
   map<string, Vertice> grafo = le_arquivo(path);
 
-  cout << "Tudo certo" << endl;
   grafo.clear();
   return 0;
 }

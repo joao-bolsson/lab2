@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1479681125 source:/home/joao/CC/Lab2/GrafoEx/main.cpp
+	<iostream>
+	<fstream>
+	<list>
+	<map>
+	<vector>
+
