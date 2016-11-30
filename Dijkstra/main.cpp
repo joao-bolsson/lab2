@@ -98,7 +98,21 @@ struct Grafo {
 
     void dijkstra(const int fonte, Grafo g) {
         // TODO: implementar
-        
+        // inicializa todos os vertices do grafo com chave infinita
+        g.nvertices = numeric_limits<float>::max();
+        // cria heap minimo
+        auto compara = [](Vertice* v1, Vertice * v2) {
+            return v1->chave > v2->chave;
+        };
+        Heap < Vertice*, decltype(compara) > heap(compara);
+        //inseretodos os vértices de G no heap
+        for (auto it = begin(g.grafo); it != end(g.grafo); it++) {
+            heap.insere(it->second);
+        }
+
+        while (!heap.vazio()) {
+            auto u = heap.topo();
+        }
     }
 
     /*
