@@ -100,6 +100,7 @@ struct Grafo {
         // TODO: implementar
         // inicializa todos os vertices do grafo com chave infinita
         g.nvertices = numeric_limits<float>::max();
+	// todos os vertices com peso maximo e a fonte com 0
         // cria heap minimo
         auto compara = [](Vertice* v1, Vertice * v2) {
             return v1->chave > v2->chave;
@@ -109,9 +110,10 @@ struct Grafo {
         for (auto it = begin(g.grafo); it != end(g.grafo); it++) {
             heap.insere(it->second);
         }
-
+	// atualizar
         while (!heap.vazio()) {
             auto u = heap.topo();
+            // depois que pega, remover o topo
         }
     }
 
