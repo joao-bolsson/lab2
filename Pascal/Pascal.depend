@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1476738440 source:/home/joao/CC/Lab2/Pascal/main.cpp
+	<iostream>
+	<fstream>
+	<functional>
+	<stack>
+	<algorithm>
+

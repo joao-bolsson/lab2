@@ -1,0 +1,54 @@
+# depslib dependency file v1.0
+1475705045 source:/home/joao/CC/Lab2/t4-jvmarques/cobra.cpp
+	<iostream>
+	<fstream>
+	<functional>
+	<memory>
+	<chrono>
+	<random>
+	"cobra.hpp"
+	"Tela.hpp"
+
+1475337750 /home/joao/CC/Lab2/t4-jvmarques/cobra.hpp
+	<list>
+	<string>
+	<memory>
+	<chrono>
+	"Tela.hpp"
+	"geom.hpp"
+
+1475337750 /home/joao/CC/Lab2/t4-jvmarques/Tela.hpp
+	<allegro5/allegro.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_image.h>
+	<allegro5/allegro_color.h>
+	<allegro5/allegro_primitives.h>
+	"geom.hpp"
+
+1475337750 /home/joao/CC/Lab2/t4-jvmarques/geom.hpp
+	<cmath>
+
+1475340500 source:/home/joao/CC/Lab2/t4-jvmarques/editor.cpp
+	<iostream>
+	<fstream>
+	<functional>
+	"editor.hpp"
+	"Tela.hpp"
+
+1475337750 /home/joao/CC/Lab2/t4-jvmarques/editor.hpp
+	<vector>
+	<string>
+	"Tela.hpp"
+	"geom.hpp"
+
+1475337750 source:/home/joao/CC/Lab2/t4-jvmarques/principal.cpp
+	<iostream>
+	<allegro5/allegro.h>
+	"cobra.hpp"
+
+1475346804 source:/home/joao/CC/Lab2/t4-jvmarques/Tela.cpp
+	<iostream>
+	<cstdlib>
+	"Tela.hpp"
+	"geom.hpp"
+

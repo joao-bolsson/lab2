@@ -1,0 +1,36 @@
+# depslib dependency file v1.0
+1473732213 source:/home/joao/CC/Lab2/Trab3/principal.cpp
+	<iostream>
+	<allegro5/allegro.h>
+	"editor.hpp"
+
+1473732089 /home/joao/CC/Lab2/Trab3/editor.hpp
+	<vector>
+	<string>
+	"Tela.hpp"
+	"geom.hpp"
+
+1473732146 /home/joao/CC/Lab2/Trab3/Tela.hpp
+	<allegro5/allegro.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_image.h>
+	<allegro5/allegro_color.h>
+	<allegro5/allegro_primitives.h>
+	"geom.hpp"
+
+1473732117 /home/joao/CC/Lab2/Trab3/geom.hpp
+	<cmath>
+
+1473732179 source:/home/joao/CC/Lab2/Trab3/Tela.cpp
+	<iostream>
+	<cstdlib>
+	"Tela.hpp"
+	"geom.hpp"
+
+1473898389 source:/home/joao/CC/Lab2/Trab3/editor.cpp
+	<iostream>
+	<fstream>
+	<functional>
+	"editor.hpp"
+	"Tela.hpp"
+

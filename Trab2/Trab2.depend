@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1472507749 source:/home/joao/CC/Lab2/Trab2/main.cpp
+	<iostream>
+	<fstream>
+	<unistd.h>
+	<cstdlib>
+	<termios.h>
+	<conio.h>
+
