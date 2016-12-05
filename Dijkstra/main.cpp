@@ -131,28 +131,6 @@ struct Grafo {
         }
     }
 
-    /*
-     // recebe o grafo, o vertice de fonte 'fonte'
-void dijkstra(Grafo G, fonte){
-  inicializa todos vertices do grafo G com chave infinita
-  cria heap mínimo H 
-  inicia chave da fonte com valor 0
-  insere todos os vértices de G no heap 
-  
-  while( heap H não é vazio ){
-      u = retira do heap H o vértice mínimo  (ou topo)
-      for( cada vértice adjacente v de u ) {
-        if( é possível melhorar o caminho entre (u,v) ? (v->chave > u->chave + a->peso) ){
-          v->ant = u
-          Coloca u como vértice anterior a v 
-          Atualiza chave de v com peso de a mais chave de u (u->chave + a->peso)
-          atualiza o heap com a chave nova de v 
-        }
-      }
-  }
-}
-     */
-
     void imprime() {
         for (const auto& v : grafo) {
             cout << v.first << " -> ";
