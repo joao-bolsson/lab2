@@ -1,5 +1,8 @@
 /**
- *
+ * Implementado no NetBeans 8.2, compilado com:
+ * 
+ * make -f Makefile CONF=Debug (raiz do projeto)
+ * 
  * @author João Bolsson (jvmarques@inf.ufsm.br)
  * @since 2016, 28 Nov.
  */
@@ -117,7 +120,7 @@ struct Grafo {
 
         while (!heap.vazio()) {
             auto u = heap.topo();
-            for (auto a = u->arestas.begin(); a != u->arestas.end(); a++) {
+            for (auto a = u->aresta.begin(); a != u->aresta.end(); a++) {
                 if (grafo[a->v].chave > u->chave + a->peso) {
                     grafo[a->v].anterior = u->info;
                     grafo[a->v].chave = u->chave + a->peso;
