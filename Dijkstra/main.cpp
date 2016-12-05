@@ -96,24 +96,35 @@ struct Grafo {
         entrada.close();
     }
 
-    void dijkstra(const int fonte, Grafo g) {
-        // TODO: implementar
-        // inicializa todos os vertices do grafo com chave infinita
-        g.nvertices = numeric_limits<float>::max();
-	// todos os vertices com peso maximo e a fonte com 0
+    void dijkstra(const int fonte) {
+        for (map<int, Vertice>::iterator it = begin(grafo); it != end(grafo); ++it) {
+            // inicianliza todos os vertices com chave infinita
+            it->second.chave = std::numeric_limits<float>::infinity();
+        }
         // cria heap minimo
         auto compara = [](Vertice* v1, Vertice * v2) {
             return v1->chave > v2->chave;
         };
         Heap < Vertice*, decltype(compara) > heap(compara);
-        //inseretodos os vértices de G no heap
-        for (auto it = begin(g.grafo); it != end(g.grafo); it++) {
-            heap.insere(it->second);
+
+        grafo[fonte].chave = 0;
+        // insere todos os vertices do grafo na heap
+        for (auto& i : grafo) {
+            heap.insere(&i.second);
         }
-	// atualizar
+        // atualiza a heap
+        heap.atualiza();
+
         while (!heap.vazio()) {
             auto u = heap.topo();
-            // depois que pega, remover o topo
+            for (auto a = u->arestas.begin(); a != u->arestas.end(); a++) {
+                if (grafo[a->v].chave > u->chave + a->peso) {
+                    grafo[a->v].anterior = u->info;
+                    grafo[a->v].chave = u->chave + a->peso;
+                }
+            }
+            heap.remove();
+            heap.atualiza();
         }
     }
 
