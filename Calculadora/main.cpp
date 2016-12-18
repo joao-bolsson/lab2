@@ -20,7 +20,7 @@ int main() {
     calc.operando(6.0);
     calc.operador(')');
 
-    if (calc.fim() == false) {
+    if (!calc.fim()) {
         std::cout << "ERRO: formula errada!" << std::endl;
     }
     x = calc.resultado();

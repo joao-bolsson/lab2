@@ -107,11 +107,8 @@ struct Calculadora {
     void calcula(char operador, T a, T b) {
         float result = 0;
         if (operador == '+') {
-            cout << "soma";
-            
-            float result = a + b;
+            result = soma(a, b);
         }
-        cout << result;
         operando(result);
     }
 
@@ -134,7 +131,7 @@ struct Calculadora {
     // finaliza o calculo, retorna false se erro detectado
 
     bool fim(void) {
-        return false;
+        return operadores.empty();
     }
 
     // retorna o resultado calculo (topo da pilha de operandos)
