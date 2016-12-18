@@ -27,6 +27,10 @@
 
 #include <stack>
 
+#include <iostream>
+
+using namespace std;
+
 template<typename T>
 struct Calculadora {
     // ver http://en.cppreference.com/w/cpp/container/stack
@@ -60,10 +64,55 @@ struct Calculadora {
 
     void operador(char op) {
         if (op == ')') {
-
+            cout << "fecha->";
+            // pega o operador
+            char operador = operadores.top();
+            operadores.pop();
+            // tira o abre parenteses tambem
+            operadores.pop();
+            // pega os dois ultimos operandos
+            T a = operandos.top();
+            operandos.pop();
+            T b = operandos.top();
+            operandos.pop();
+            calcula(operador, a, b);
+        } else if (op == '(') {
+            cout << "abre->";
+            operadores.push(op);
+        } else {
+            cout << "normal->";
+            operadores.push(op);
         }
-        // verficar aqui o operador inserido
-        operadores.push(op);
+        /*
+        if (op == ')') {
+            std::cout << "fecha";
+            float result = 0;
+            // pega o operador
+            char operador = operadores.top();
+            operadores.pop();
+            // pega os dois ultimos operandos
+            T a = operandos.top();
+            operandos.pop();
+            T b = operandos.top();
+            operandos.pop();
+        } else if (op != '(') {
+            std::cout << "bota";
+            // verficar aqui o operador inserido
+            operadores.push(op);
+        }
+         */
+        //operadores.push(op);
+    }
+
+    void calcula(char operador, T a, T b) {
+        float result = 0;
+        if (operador == '+') {
+            cout << "soma";
+            
+            float result = a + b;
+        }
+        cout << result;
+        operando(result);
     }
 
     float divide(float a, float b) {
