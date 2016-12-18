@@ -10,9 +10,13 @@
 #include "Calculadora.hpp"
 #include <iostream>
 
+using namespace std;
+
 int main() {
     Calculadora<float> calc;
     float x;
+
+    string expressao("5*(((9+8)*(4*6))+7)");
 
     calc.operador('(');
     calc.operando(3.0);
@@ -21,10 +25,10 @@ int main() {
     calc.operador(')');
 
     if (!calc.fim()) {
-        std::cout << "ERRO: formula errada!" << std::endl;
+        cout << "ERRO: formula errada!" << endl;
     }
     x = calc.resultado();
-    std::cout << "EXEMPLO: (3+6) = " << x << std::endl;
+    cout << "EXEMPLO: (3+6) = " << x << endl;
     calc.destroi();
     return 0;
 }

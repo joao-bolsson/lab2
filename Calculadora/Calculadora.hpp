@@ -58,13 +58,29 @@ struct Calculadora {
         operandos.push(op);
     }
 
+    bool temPrecedencia(char opTopo, char opNovo) {
+        char operador[] = {'+', '-', '*', '/', '^'};
+        int iTopo = 0, iNovo = 0;
+        for (int i = 0; i < 5; i++) {
+            if (operador[i] == opTopo) {
+                iTopo = i;
+            }
+            if (operador[i] == opNovo) {
+                iNovo = i;
+            }
+        }
+        if (iTopo > iNovo) {
+            return true;
+        }
+        return false;
+    }
+
     // insere um novo operador para o calculo (pode ser '+', '-', '*', '/', '^')
     // se for um abre parenteses '(' tudo ok. 
     // se for um fecha parenteses ')', deve-se calcular tudo dentro.
 
     void operador(char op) {
         if (op == ')') {
-            cout << "fecha->";
             // pega o operador
             char operador = operadores.top();
             operadores.pop();
@@ -76,32 +92,24 @@ struct Calculadora {
             T b = operandos.top();
             operandos.pop();
             calcula(operador, a, b);
-        } else if (op == '(') {
-            cout << "abre->";
+        } else if (op != '('){
+            // pega o operador
+            char opTopo = operadores.top();
+            if (temPrecedencia(opTopo, op)) {
+                // pega o operador
+                char operador = operadores.top();
+                operadores.pop();
+                // pega os dois ultimos operandos
+                T a = operandos.top();
+                operandos.pop();
+                T b = operandos.top();
+                operandos.pop();
+                calcula(operador, a, b);
+            }
             operadores.push(op);
         } else {
-            cout << "normal->";
             operadores.push(op);
         }
-        /*
-        if (op == ')') {
-            std::cout << "fecha";
-            float result = 0;
-            // pega o operador
-            char operador = operadores.top();
-            operadores.pop();
-            // pega os dois ultimos operandos
-            T a = operandos.top();
-            operandos.pop();
-            T b = operandos.top();
-            operandos.pop();
-        } else if (op != '(') {
-            std::cout << "bota";
-            // verficar aqui o operador inserido
-            operadores.push(op);
-        }
-         */
-        //operadores.push(op);
     }
 
     void calcula(char operador, T a, T b) {
