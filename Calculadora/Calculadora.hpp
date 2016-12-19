@@ -80,6 +80,10 @@ struct Calculadora {
     // se for um fecha parenteses ')', deve-se calcular tudo dentro.
 
     void operador(char op) {
+        if (operadores.empty()) {
+            operadores.push(op);
+            return;
+        }
         if (op == ')') {
             // pega o operador
             char operador = operadores.top();
@@ -92,7 +96,7 @@ struct Calculadora {
             T b = operandos.top();
             operandos.pop();
             calcula(operador, a, b);
-        } else if (op != '('){
+        } else if (op != '(') {
             // pega o operador
             char opTopo = operadores.top();
             if (temPrecedencia(opTopo, op)) {
@@ -116,7 +120,14 @@ struct Calculadora {
         float result = 0;
         if (operador == '+') {
             result = soma(a, b);
+        } else if (operador == '*') {
+            result = multiplica(a, b);
+        } else if (operador == '/') {
+            result = divide(a, b);
+        } else if (operador == '-') {
+            result = subtrai(a, b);
         }
+        cout << a << operador << b << ": " << result << endl;
         operando(result);
     }
 
@@ -138,7 +149,18 @@ struct Calculadora {
 
     // finaliza o calculo, retorna false se erro detectado
 
-    bool fim(void) {
+    bool fim() {
+        if (operadores.size() > 0) { // ainda tem operadores fora dos parenteses
+            // pega o operador
+            char operador = operadores.top();
+            operadores.pop();
+            // pega os dois ultimos operandos
+            T a = operandos.top();
+            operandos.pop();
+            T b = operandos.top();
+            operandos.pop();
+            calcula(operador, a, b);
+        }
         return operadores.empty();
     }
 
