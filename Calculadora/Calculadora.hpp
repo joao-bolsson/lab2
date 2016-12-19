@@ -28,6 +28,7 @@
 #include <stack>
 
 #include <iostream>
+#include <math.h> 
 
 using namespace std;
 
@@ -126,9 +127,15 @@ struct Calculadora {
             result = divide(a, b);
         } else if (operador == '-') {
             result = subtrai(a, b);
+        } else if (operador == '^') {
+            result = potencia(a, b);
         }
         cout << a << operador << b << ": " << result << endl;
         operando(result);
+    }
+
+    float potencia(float a, float b) {
+        return pow(b, a);
     }
 
     float divide(float a, float b) {
@@ -150,7 +157,9 @@ struct Calculadora {
     // finaliza o calculo, retorna false se erro detectado
 
     bool fim() {
-        if (operadores.size() > 0) { // ainda tem operadores fora dos parenteses
+        int i = 0;
+        // limita o while - evita loop infinito
+        while (operadores.size() > 0 && i < 10) {
             // pega o operador
             char operador = operadores.top();
             operadores.pop();
@@ -160,6 +169,7 @@ struct Calculadora {
             T b = operandos.top();
             operandos.pop();
             calcula(operador, a, b);
+            i++;
         }
         return operadores.empty();
     }
