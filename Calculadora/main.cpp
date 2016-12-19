@@ -12,7 +12,7 @@
 
 using namespace std;
 
-float charToInt(char c) {
+float charToFloat(char c) {
     if (c >= '0' && c <= '9') {
         float num = 0.0;
         for (int i = '0'; i <= '9'; i++) {
@@ -30,48 +30,33 @@ float charToInt(char c) {
 
 int main() {
     Calculadora<float> calc;
-    float x;
+    
+    string expressao("5*(((9+8)*(4*6))+7)");
+    int unsigned len = expressao.length();
+    for (int unsigned i = 0; i < len; i++) {
+        char ch = expressao.at(i);
+        if (ch >= '0' && ch <= '9') {
+            // eh um numero
+            float num = charToFloat(ch);
+            if (num < 0) {
+                cout << "ERRO: impossível converter char para float." << endl;
+            } else {
+                calc.operando(num);
+            }
+        } else {
+            calc.operador(ch);
+        }
+    }
 
-//    string expressao("5*(((9+8)*(4*6))+7)");
-//    int unsigned len = expressao.length();
-//    for (int unsigned i = 0; i < len; i++) {
-//        char ch = expressao.at(i);
-//        if (ch >= '0' && ch <= '9' && ch == '5') {
-//            // eh um numero
-//            float num = charToInt(ch);
-//            calc.operando(num);
-//        } else {
-//            calc.operador(ch);
-//        }
-//    }
-//    cout << '\n';
-
-    calc.operando(5.0);
-    calc.operador('*');
-    calc.operador('(');
-    calc.operador('(');
-    calc.operador('(');
-    calc.operando(9.0);
-    calc.operador('+');
-    calc.operando(8.0);
-    calc.operador(')');
-    calc.operador('*');
-    calc.operador('(');
-    calc.operando(4.0);
-    calc.operador('*');
-    calc.operando(6.0);
-    calc.operador(')');
-    calc.operador(')');
-    calc.operador('+');
-    calc.operando(7.0);
-    calc.operador(')');
-
+    cout << '\n';
 
     if (!calc.fim()) {
         cout << "ERRO: formula errada!" << endl;
+        return 0;
     }
+    float x;
     x = calc.resultado();
-    cout << "EXEMPLO: = " << x << endl;
+    cout << expressao << " = " << x << endl;
     calc.destroi();
     return 0;
 }
