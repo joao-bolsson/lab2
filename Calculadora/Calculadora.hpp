@@ -86,17 +86,18 @@ struct Calculadora {
             return;
         }
         if (op == ')') {
-            // pega o operador
-            char operador = operadores.top();
+            while (operadores.top() != '(') {
+                // pega o operador
+                char operador = operadores.top();
+                operadores.pop();
+                // pega os dois ultimos operandos
+                T a = operandos.top();
+                operandos.pop();
+                T b = operandos.top();
+                operandos.pop();
+                calcula(operador, a, b);
+            }
             operadores.pop();
-            // tira o abre parenteses tambem
-            operadores.pop();
-            // pega os dois ultimos operandos
-            T a = operandos.top();
-            operandos.pop();
-            T b = operandos.top();
-            operandos.pop();
-            calcula(operador, a, b);
         } else if (op != '(') {
             // pega o operador
             char opTopo = operadores.top();
